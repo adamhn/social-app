@@ -180,6 +180,10 @@
     <Compile Include="Migrations\202012172313252_BirthDate.designer.cs">
       <DependentUpon>202012172313252_BirthDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012182000221_usermodel.cs" />
+    <Compile Include="Migrations\202012182000221_usermodel.designer.cs">
+      <DependentUpon>202012182000221_usermodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -368,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012172313252_BirthDate.resx">
       <DependentUpon>202012172313252_BirthDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012182000221_usermodel.resx">
+      <DependentUpon>202012182000221_usermodel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

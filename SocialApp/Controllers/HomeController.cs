@@ -17,6 +17,12 @@ namespace SocialApp.Controllers
         {
             ViewBag.Message = "Your application description page.";
             return View();
-        } 
+        }
+
+        [Route("home/released/{year}/{month:regex(\\d{4}):range(1, 12)}")]
+        public ActionResult ByReleaseYear(int year, int month)
+        {
+            return Content(year + "/" + month);
+        }
     }
 }
