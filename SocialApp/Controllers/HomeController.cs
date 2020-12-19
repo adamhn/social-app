@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SocialApp.ViewModels;
 
 namespace SocialApp.Controllers
 {
@@ -29,35 +30,29 @@ namespace SocialApp.Controllers
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
-        }
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-        public async Task<ActionResult> About()
-        {
-            ApplicationUser currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
-            if (currentUser != null)
+            var viewModel = new HomeViewModel
             {
-                ViewBag.Message = "Hey " + currentUser.Firstname  + " " + currentUser.Lastname;
-                return View();
-            }
+                Users = DbContext.Users.ToList()
+            };
 
-            ViewBag.Message = "Your application description page for /about. Hey anonymos";
-            return View();
+            if (currentUser == null) return View(viewModel);
+
+            ViewBag.Message = "Hey " + currentUser.Firstname + " " + currentUser.Lastname;
+            viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).ToList();
+
+            return View(viewModel);
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your application description page for /contact.";
-            return View();
-        }
+        //TODO: home/user/id
 
-        [Route("home/released/{year}/{month:regex(\\d{4}):range(1, 12)}")]
-        public ActionResult ByReleaseYear(int year, int month)
-        {
-            return Content(year + "/" + month);
-        }
+        //[Route("home/released/{year}/{month:regex(\\d{4}):range(1, 12)}")]
+        //public ActionResult ByReleaseYear(int year, int month)
+        //{
+        //    return Content(year + "/" + month);
+        //}
     }
 }
