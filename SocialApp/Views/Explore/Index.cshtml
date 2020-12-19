@@ -1,20 +1,17 @@
 ﻿@using Microsoft.AspNet.Identity
-@model SocialApp.ViewModels.HomeViewModel
+@model SocialApp.ViewModels.ExploreViewModel
 
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "Explore";
 }
 
 <h3>@ViewBag.Message</h3>
 
-
-
 <div class="row">
     @foreach (var user in Model.Users)
     {
-        //if (user. = User.Identity.Name)
         <div class="col-md-4">
-            <h2>@user.Firstname</h2>
+            <a href="/Explore/Details/@user.Id"><h2>@user.Firstname</h2></a>
         </div>
     }
 </div>

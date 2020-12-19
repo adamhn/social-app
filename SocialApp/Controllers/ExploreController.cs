@@ -11,7 +11,7 @@ using SocialApp.ViewModels;
 
 namespace SocialApp.Controllers
 {
-    public class HomeController : Controller
+    public class ExploreController : Controller
     {
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace SocialApp.Controllers
         /// </summary>
         protected UserManager<ApplicationUser> UserManager { get; set; }
 
-        public HomeController()
+        public ExploreController()
         {
             this.DbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
@@ -34,7 +34,7 @@ namespace SocialApp.Controllers
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            var viewModel = new HomeViewModel
+            var viewModel = new ExploreViewModel
             {
                 Users = DbContext.Users.ToList()
             };
@@ -45,6 +45,15 @@ namespace SocialApp.Controllers
             viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).ToList();
 
             return View(viewModel);
+        }
+
+        public ActionResult Details(string id)
+        {
+            var user = DbContext.Users.Find(id);
+
+            if (user == null) return HttpNotFound();
+
+            return View(user);
         }
 
         //TODO: home/user/id

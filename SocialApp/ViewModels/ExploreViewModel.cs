@@ -6,7 +6,7 @@ using SocialApp.Models;
 
 namespace SocialApp.ViewModels
 {
-    public class HomeViewModel
+    public class ExploreViewModel
     {
         public List<ApplicationUser> Users { get; set; }
     }

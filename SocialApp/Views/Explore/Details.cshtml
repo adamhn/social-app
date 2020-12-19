@@ -1,0 +1,13 @@
+﻿@model SocialApp.Models.ApplicationUser
+
+@{
+    ViewBag.Title = Model.GetFullName();
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.GetFullName()</h2>
+
+<ul>
+    <li>@Model.Email</li>
+    <li>@Model.BirthDate</li>
+</ul>
