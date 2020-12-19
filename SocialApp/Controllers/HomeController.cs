@@ -16,7 +16,7 @@ namespace SocialApp.Controllers
         /// <summary>
         /// Application DB context
         /// </summary>
-        protected ApplicationDbContext ApplicationDbContext { get; set; }
+        protected ApplicationDbContext DbContext { get; set; }
 
         /// <summary>
         /// User manager - attached to application DB context
@@ -25,8 +25,8 @@ namespace SocialApp.Controllers
 
         public HomeController()
         {
-            this.ApplicationDbContext = new ApplicationDbContext();
-            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
+            this.DbContext = new ApplicationDbContext();
+            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
         }
 
         public ActionResult Index()
@@ -42,7 +42,7 @@ namespace SocialApp.Controllers
             {
                 ViewBag.Message = "Hey " + currentUser.Firstname  + " " + currentUser.Lastname;
                 return View();
-            } 
+            }
 
             ViewBag.Message = "Your application description page for /about. Hey anonymos";
             return View();

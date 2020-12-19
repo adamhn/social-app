@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace SocialApp.Models
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateTime BirthDate { get; set; }
+        public List<Friend> Friends { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
