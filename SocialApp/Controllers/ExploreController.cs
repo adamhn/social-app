@@ -29,13 +29,12 @@ namespace SocialApp.Controllers
 
             var viewModel = new ExploreViewModel
             {
-                Users = DbContext.Users.ToList()
+                Users = DbContext.Users.OrderBy(u => u.Firstname).ToList()
             };
 
             if (currentUser == null) return View(viewModel);
 
-            ViewBag.Message = "Hey " + currentUser.Firstname + " " + currentUser.Lastname;
-            viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).ToList();
+            viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).OrderBy(u => u.Firstname).ToList();
 
             return View(viewModel);
         }
@@ -43,37 +42,15 @@ namespace SocialApp.Controllers
         public ActionResult Details(string id)
         {
             var user = DbContext.Users.Find(id);
-
             if (user == null) return HttpNotFound();
-
             return View(user);
         }
 
-        public FileContentResult Photo(string userId)
+        public ActionResult GetUserPhoto(string userId)
         {
-            // get EF Database (maybe different way in your applicaiton)
-            var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-
-            // find the user. I am skipping validations and other checks.
-            var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
-
-            // check if there is no image and in that case return default image
-            // C:\Users\adam\Source\Repos\social-app\SocialApp\
-            string startupPath = AppDomain.CurrentDomain.BaseDirectory;
-            byte[] defaultImageBytes = System.IO.File.ReadAllBytes(startupPath + "Content\\Images\\default-image.jpg");
-
-            //string imageString64Date = Convert.ToBase64String(defaultImageBytes);
-            if (user.Picture == null) return new FileContentResult(defaultImageBytes, "image/jpeg");
-
+            var user = DbContext.Users.Find(userId);
+            if (user == null) return HttpNotFound();
             return new FileContentResult(user.Picture, "image/jpeg");
         }
-
-        //TODO: home/user/id
-
-        //[Route("home/released/{year}/{month:regex(\\d{4}):range(1, 12)}")]
-        //public ActionResult ByReleaseYear(int year, int month)
-        //{
-        //    return Content(year + "/" + month);
-        //}
     }
 }
