@@ -23,6 +23,7 @@ namespace SocialApp.Controllers
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
         }
 
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -39,6 +40,7 @@ namespace SocialApp.Controllers
             return View(viewModel);
         }
 
+        
         public ActionResult Details(string id)
         {
             var user = DbContext.Users.Find(id);
@@ -46,6 +48,7 @@ namespace SocialApp.Controllers
             return View(user);
         }
 
+        [AllowAnonymous]
         public ActionResult GetUserPhoto(string userId)
         {
             var user = DbContext.Users.Find(userId);
