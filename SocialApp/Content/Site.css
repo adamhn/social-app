@@ -6,7 +6,9 @@ body {
 }
 
 /*::::::::::::::: COMMON :::::::::::::::*/
-
+.page-title {
+    margin-bottom:30px;
+}
 
 /*::::::::::::::: NAVIGATION BAR :::::::::::::::*/
 nav {
@@ -18,3 +20,19 @@ nav li {
 }
 
 /*::::::::::::::: EXPLORE PAGE :::::::::::::::*/
+.explore-user-item {
+    text-align:center;
+    transition: 0.5s opacity;
+}
+
+.explore-user-item:hover {
+    opacity: 0.8;
+}
+
+.explore-user-item a {
+    text-decoration: none;
+}
+
+.explore-user-name {
+    line-height:3;
+}

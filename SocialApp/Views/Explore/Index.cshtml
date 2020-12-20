@@ -5,19 +5,16 @@
     ViewBag.Title = "Explore";
 }
 
-<h3>@ViewBag.Message</h3>
+<h3 class="page-title">@ViewBag.Title</h3>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
-
     @foreach (var user in Model.Users)
     {
-    <div class="col mb-4">
-        <a class="text-dark" href="/Explore/Details/@user.Id">
-            <div class="card-item">
+        <div class="explore-user-item col mb-3">
+            <a class="text-dark" href="/Explore/Details/@user.Id">
                 <img class="card-img-top" src="@Url.Action("Photo", "Explore" , new { UserId=user.Id })" />
-                 <p class="card-name">@user.Firstname @user.Lastname</p>
-            </div>
-        </a>
-    </div>
+                <h6 class="explore-user-name">@user.Firstname @user.Lastname</h6>
+            </a>
+        </div>
     }
 </div>
