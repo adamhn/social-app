@@ -196,6 +196,10 @@
     <Compile Include="Migrations\202012191256404_alterfriends_remove_field.designer.cs">
       <DependentUpon>202012191256404_alterfriends_remove_field.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012200013058_Added user profile.cs" />
+    <Compile Include="Migrations\202012200013058_Added user profile.designer.cs">
+      <DependentUpon>202012200013058_Added user profile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Friend.cs" />
@@ -213,6 +217,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\default-image.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -345,12 +350,9 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -398,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012191256404_alterfriends_remove_field.resx">
       <DependentUpon>202012191256404_alterfriends_remove_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012200013058_Added user profile.resx">
+      <DependentUpon>202012200013058_Added user profile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

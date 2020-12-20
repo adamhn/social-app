@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SocialApp.ViewModels;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace SocialApp.Controllers
 {
@@ -54,6 +55,22 @@ namespace SocialApp.Controllers
             if (user == null) return HttpNotFound();
 
             return View(user);
+        }
+
+        public FileContentResult Photo(string userId)
+        {
+            // get EF Database (maybe different way in your applicaiton)
+            var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+
+            // find the user. I am skipping validations and other checks.
+            var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
+            
+            // check if there is no image and in that case return default image
+            //byte[] defaultImageBytes = System.IO.File.ReadAllBytes("~/Content/Images/default-image.jpg");
+            //string imageString64Date = Convert.ToBase64String(defaultImageBytes);
+            //if (user.Picture == null) return new FileContentResult(imageString64Date, "image/jpeg");
+
+            return new FileContentResult(user.Picture, "image/jpeg");
         }
 
         //TODO: home/user/id

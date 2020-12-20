@@ -7,11 +7,21 @@
 
 <h3>@ViewBag.Message</h3>
 
-<div class="row">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
+
     @foreach (var user in Model.Users)
     {
-        <div class="col-md-4">
-            <a href="/Explore/Details/@user.Id"><h2>@user.Firstname</h2></a>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="@Url.Action("Photo", "Explore" , new { UserId=user.Id })" />
+                <div class="card-body">
+                    <a href="/Explore/Details/@user.Id">
+                        <h5 class="card-title">
+                            @user.Firstname
+                        </h5>
+                    </a>
+                </div>
+            </div>
         </div>
     }
 </div>

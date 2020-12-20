@@ -14,6 +14,7 @@ namespace SocialApp.Models
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateTime BirthDate { get; set; }
+        public byte[] Picture { get; set; }
         public List<Friend> Friends { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
