@@ -80,8 +80,9 @@ namespace SocialApp.Models
 
         [Required]
         [MinimumAge(18)]
-        [Display(Name = "Date of Birth")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Birthdate")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         [Required]
