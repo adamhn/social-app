@@ -11,17 +11,13 @@
 
     @foreach (var user in Model.Users)
     {
-        <div class="col mb-4">
-            <div class="card h-100">
+    <div class="col mb-4">
+        <a class="text-dark" href="/Explore/Details/@user.Id">
+            <div class="card-item">
                 <img class="card-img-top" src="@Url.Action("Photo", "Explore" , new { UserId=user.Id })" />
-                <div class="card-body">
-                    <a href="/Explore/Details/@user.Id">
-                        <h5 class="card-title">
-                            @user.Firstname
-                        </h5>
-                    </a>
-                </div>
+                 <p class="card-name">@user.Firstname @user.Lastname</p>
             </div>
-        </div>
+        </a>
+    </div>
     }
 </div>

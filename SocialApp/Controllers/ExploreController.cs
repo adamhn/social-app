@@ -14,15 +14,7 @@ namespace SocialApp.Controllers
 {
     public class ExploreController : Controller
     {
-
-        /// <summary>
-        /// Application DB context
-        /// </summary>
         protected ApplicationDbContext DbContext { get; set; }
-
-        /// <summary>
-        /// User manager - attached to application DB context
-        /// </summary>
         protected UserManager<ApplicationUser> UserManager { get; set; }
 
         public ExploreController()
@@ -64,11 +56,14 @@ namespace SocialApp.Controllers
 
             // find the user. I am skipping validations and other checks.
             var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
-            
+
             // check if there is no image and in that case return default image
-            //byte[] defaultImageBytes = System.IO.File.ReadAllBytes("~/Content/Images/default-image.jpg");
+            // C:\Users\adam\Source\Repos\social-app\SocialApp\
+            string startupPath = AppDomain.CurrentDomain.BaseDirectory;
+            byte[] defaultImageBytes = System.IO.File.ReadAllBytes(startupPath + "Content\\Images\\default-image.jpg");
+
             //string imageString64Date = Convert.ToBase64String(defaultImageBytes);
-            //if (user.Picture == null) return new FileContentResult(imageString64Date, "image/jpeg");
+            if (user.Picture == null) return new FileContentResult(defaultImageBytes, "image/jpeg");
 
             return new FileContentResult(user.Picture, "image/jpeg");
         }

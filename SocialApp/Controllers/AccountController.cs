@@ -17,17 +17,17 @@ namespace SocialApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext dbContext )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
+        
         public ApplicationSignInManager SignInManager
         {
             get
@@ -151,12 +151,18 @@ namespace SocialApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Load default image
+                string startupPath = AppDomain.CurrentDomain.BaseDirectory;
+                byte[] defaultImageBytes = System.IO.File.ReadAllBytes(startupPath + "Content\\Images\\default-image.jpg");
+
                 var user = new ApplicationUser { 
                     UserName = model.Email,
                     Email = model.Email,
                     BirthDate = model.BirthDate,
                     Firstname = model.Firstname, 
-                    Lastname = model.Lastname};
+                    Lastname = model.Lastname,
+                    Picture = defaultImageBytes
+                    };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
