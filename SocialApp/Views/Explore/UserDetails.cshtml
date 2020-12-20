@@ -1,0 +1,15 @@
+﻿@model SocialApp.ViewModels.UserDetailsViewModel
+
+@{
+    ViewBag.Title = Model.GetFullName();
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.GetFullName()</h2>
+
+<ul>
+    <li>@Model.User.Email</li>
+    <li>@Model.User.BirthDate</li>
+</ul>
+
+<img src="@Url.Action("GetUserPhoto", "Explore" , new { UserId=Model.User.Id })" />

@@ -32,11 +32,6 @@ namespace SocialApp.Models
             // Add custom user claims here
             return userIdentity;
         }
-
-        public string GetFullName()
-        {
-            return Firstname + " " + Lastname;
-        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

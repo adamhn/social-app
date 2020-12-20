@@ -28,7 +28,7 @@ namespace SocialApp.Controllers
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            var viewModel = new ExploreViewModel
+            var viewModel = new ViewModels.IndexViewModel
             {
                 Users = DbContext.Users.OrderBy(u => u.Firstname).ToList()
             };
@@ -41,11 +41,11 @@ namespace SocialApp.Controllers
         }
 
         
-        public ActionResult Details(string id)
+        public ActionResult UserDetails(string id)
         {
             var user = DbContext.Users.Find(id);
             if (user == null) return HttpNotFound();
-            return View(user);
+            return View(new UserDetailsViewModel { User = user });
         }
 
         [AllowAnonymous]
