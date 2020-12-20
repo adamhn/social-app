@@ -12,12 +12,12 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace SocialApp.Controllers
 {
-    public class ExploreController : Controller
+    public class UsersController : Controller
     {
         protected ApplicationDbContext DbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
 
-        public ExploreController()
+        public UsersController()
         {
             this.DbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
@@ -41,9 +41,9 @@ namespace SocialApp.Controllers
         }
 
         
-        public ActionResult UserDetails(string id)
+        public ActionResult Details(string userId)
         {
-            var user = DbContext.Users.Find(id);
+            var user = DbContext.Users.Find(userId);
             if (user == null) return HttpNotFound();
             return View(new UserDetailsViewModel { User = user });
         }

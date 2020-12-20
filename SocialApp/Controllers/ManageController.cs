@@ -97,7 +97,7 @@ namespace SocialApp.Controllers
             // save changes to database
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Explore");
+            return RedirectToAction("Index", "Users");
         }
 
         //

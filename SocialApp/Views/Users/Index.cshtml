@@ -11,8 +11,8 @@
     @foreach (var user in Model.Users)
     {
         <div class="explore-user-item col mb-3">
-            <a class="text-dark" href="/Explore/UserDetails/@user.Id">
-                <img class="card-img-top" src="@Url.Action("GetUserPhoto", "Explore" , new { UserId=user.Id })" />
+            <a class="text-dark" href="@Url.Action("Details", "Users", new { userId=user.Id })">
+                <img class="card-img-top" src="@Url.Action("GetUserPhoto", "Users" , new { UserId=user.Id })" />
                 <h6 class="explore-user-name">@user.Firstname @user.Lastname</h6>
             </a>
         </div>

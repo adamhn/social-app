@@ -119,7 +119,7 @@ namespace SocialApp.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                    
                     //TODO:  Redirect to profile
-                    return RedirectToAction("Index", "Explore");
+                    return RedirectToAction("Index", "Users");
                 }
                 AddErrors(result);
             }
@@ -141,7 +141,7 @@ namespace SocialApp.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Explore");
+            return RedirectToAction("Index", "Users");
         }
         
         protected override void Dispose(bool disposing)
@@ -190,7 +190,7 @@ namespace SocialApp.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Explore");
+            return RedirectToAction("Index", "Users");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
