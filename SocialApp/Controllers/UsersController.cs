@@ -37,7 +37,7 @@ namespace SocialApp.Controllers
 
             viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).OrderBy(u => u.Firstname).ToList();
 
-            return View(viewModel);
+            return View(viewModel); 
         }
 
         
