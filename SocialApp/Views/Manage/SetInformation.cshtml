@@ -1,15 +1,13 @@
 ﻿@model SocialApp.Models.SetInformationViewModel
-
 @{
     ViewBag.Title = "Set Information";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <h2>@ViewBag.Title</h2>
     <hr />
 
-    @using (Html.BeginForm("SetInformation", "Manage"))
+    @using (Html.BeginForm("SetInformation", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -23,8 +21,9 @@
                 @Html.ValidationMessageFor(x => x.Lastname, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        
-        @Html.ActionLink("Update Profile", "Index", null, new { @class = "btn btn-primary" })
+        <input type="submit" value="Update Profile" class="btn btn-primary" />
     }
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

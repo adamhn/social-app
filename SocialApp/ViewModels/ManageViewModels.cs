@@ -9,8 +9,6 @@ namespace SocialApp.Models
 
     public class SetInformationViewModel
     {
-        public ApplicationUser CurrentUser { get; set; }
-
         [Required]
         [Display(Name = "Firstname")]
         [StringLength(100)]

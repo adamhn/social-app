@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -68,22 +69,16 @@ namespace SocialApp.Controllers
 
         public ActionResult SetInformation()
         {
-            var viewModel = new SetInformationViewModel
-            {
-                Firstname = "",
-                Lastname = ""
-            };
-
-            return View("SetInformation", viewModel);
+            return View();
         }
 
         // POST: /Manage/SetInformation
         [HttpPost]
-        public ActionResult SetInformation(IndexViewModel model)
+        public async Task<ActionResult> SetInformation(SetInformationViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-
+                return View(model);
             }
 
             return View(model);
