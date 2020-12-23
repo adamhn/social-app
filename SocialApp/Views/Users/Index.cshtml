@@ -5,7 +5,18 @@
     ViewBag.Title = "Explore";
 }
 
-<h3 class="page-title">Welcome @User.Identity.GetUserName(), find new people</h3>
+@if (Request.IsAuthenticated)
+{
+    <div class="users-profile-container">
+        <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=@Model.CurrentUser.Id })" alt="Profile Picture" class="users-profile-thumbnail">
+        <h3 class="page-title">Hi <strong>@Model.CurrentUser.Firstname</strong>, let's find new people.</h3>
+    </div>
+    <hr />
+}
+else
+{
+    <h3 class="page-title">Hi there, welcome to SocialMeet.</h3>
+}
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
     @foreach (var user in Model.Users)

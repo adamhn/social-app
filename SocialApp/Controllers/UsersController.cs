@@ -30,7 +30,8 @@ namespace SocialApp.Controllers
 
             var viewModel = new ViewModels.IndexViewModel
             {
-                Users = DbContext.Users.OrderBy(u => u.Firstname).ToList()
+                Users = DbContext.Users.OrderBy(u => u.Firstname).ToList(),
+                CurrentUser = currentUser
             };
 
             if (currentUser == null) return View(viewModel);

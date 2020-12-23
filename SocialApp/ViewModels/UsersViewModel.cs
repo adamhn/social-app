@@ -11,6 +11,8 @@ namespace SocialApp.ViewModels
     {
         [Required]
         public List<ApplicationUser> Users { get; set; }
+        public ApplicationUser CurrentUser { get; set; }
+
     }
 
     public class UserDetailsViewModel

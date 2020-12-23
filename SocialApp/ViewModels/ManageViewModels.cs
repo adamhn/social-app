@@ -5,14 +5,25 @@ using Microsoft.Owin.Security;
 
 namespace SocialApp.Models
 {
-    public class IndexViewModel
+    public class IndexViewModel { }
+
+    public class SetInformationViewModel
     {
-        public bool HasPassword { get; set; }
-        public IList<UserLoginInfo> Logins { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool TwoFactor { get; set; }
-        public bool BrowserRemembered { get; set; }
+        public ApplicationUser CurrentUser { get; set; }
+
+        [Required]
+        [Display(Name = "Firstname")]
+        [StringLength(100)]
+        public string Firstname { get; set; }
+
+        [Required]
+        [Display(Name = "Firstname")]
+        [DataType(DataType.Text)]
+        [StringLength(100, ErrorMessage = "{0} cannot be more then 100 characters long")]
+        public string Lastname { get; set; }
     }
+
+    public class SetPhotoViewModel { }
 
     public class ChangePasswordViewModel
     {

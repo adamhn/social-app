@@ -1,0 +1,21 @@
+﻿@model SocialApp.Models.SetPhotoViewModel
+
+@{
+    ViewBag.Title = "Set Photo";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("SetPhoto", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <input name="ProfilePicture" id="profile" type="file" class="form-control-file form-control-lg pl-0" accept=".png,.jpg,.jpeg,.gif,.tif">
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary mb-2">Set Photo</button>
+        }
+    </div>
+</div>

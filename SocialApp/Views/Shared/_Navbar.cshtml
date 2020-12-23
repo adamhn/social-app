@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+﻿@using Microsoft.AspNet.Identity
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
 
         @Html.ActionLink("SocialMeet", "Index", "Users", new { area = "" }, new { @class = "navbar-brand mb-0 mr-4 h1" })
@@ -10,7 +11,48 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">@Html.ActionLink("Explore", "Index", "Users")</li>
             </ul>
-            @Html.Partial("_LoginPartial")
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <ul class="nav navbar-nav">
+                        <li>
+                            @Html.ActionLink("My Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "btn btn-info", title = "Manage" })
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-success">
+                                Friend Requests <span class="badge badge-light">4</span>
+                            </button>
+                        </li>
+                        <li>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage
+                                </button>
+                                <div class="dropdown-menu">
+                                    @Html.ActionLink("Set Information", "SetInformation", "Manage", null, new {@class = "dropdown-item", title = "Set Information"})
+                                    @Html.ActionLink("Set Photo", "SetPhoto", "Manage", null, new {@class = "dropdown-item", title = "My Profile"})
+                                    <div class="dropdown-divider"></div>
+                                    @Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new {@class = "dropdown-item", title = "Change Password"})
+                                </div>
+                            </div>
+                        </li>
+                        <li><a class="btn btn-light" href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="navbar-nav">
+                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            
+            
+
+
         </div>
     </div>
 </nav>

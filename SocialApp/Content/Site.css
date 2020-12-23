@@ -19,7 +19,7 @@ nav li {
     margin-right: 10px;
 }
 
-/*::::::::::::::: EXPLORE PAGE :::::::::::::::*/
+/*::::::::::::::: USERS PAGE :::::::::::::::*/
 .explore-user-item {
     text-align:center;
     transition: 0.5s opacity;
@@ -35,4 +35,19 @@ nav li {
 
 .explore-user-name {
     line-height:3;
+}
+
+.users-profile-container {
+    display: flex;
+}
+
+.users-profile-container > .page-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.users-profile-thumbnail {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
 }

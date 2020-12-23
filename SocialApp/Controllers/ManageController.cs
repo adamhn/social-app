@@ -50,34 +50,55 @@ namespace SocialApp.Controllers
             }
         }
 
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        // GET: /Manage/
+        public ActionResult Index()
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+            //var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            //var model = new IndexViewModel
+            //{
+            //    CurrentUser = currentUser,
+            //    Firstname = currentUser.Firstname,
+            //    Lastname = currentUser.Lastname
+            //};
+
+            return View();
+        }
+
+
+        public ActionResult SetInformation()
+        {
+            var viewModel = new SetInformationViewModel
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                Firstname = "",
+                Lastname = ""
             };
+
+            return View("SetInformation", viewModel);
+        }
+
+        // POST: /Manage/SetInformation
+        [HttpPost]
+        public ActionResult SetInformation(IndexViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
             return View(model);
         }
 
-        // POST: /Manage/
+        // GET: /Manage/SetPhoto
+        [HttpGet]
+        public ActionResult SetPhoto()
+        {
+            return View();
+        }
+
+        // POST: /Manage/SetPhoto
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SetProfile(HttpPostedFileBase Profile)
+        public ActionResult SetPhoto(HttpPostedFileBase ProfilePicture)
         {
             // get EF Database (maybe different way in your applicaiton)
             var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
@@ -87,8 +108,8 @@ namespace SocialApp.Controllers
             var user = db.Users.Where(x => x.Id == userid).FirstOrDefault();
 
             // convert image stream to byte array
-            byte[] image = new byte[Profile.ContentLength];
-            Profile.InputStream.Read(image, 0, Convert.ToInt32(Profile.ContentLength));
+            byte[] image = new byte[ProfilePicture.ContentLength];
+            ProfilePicture.InputStream.Read(image, 0, Convert.ToInt32(ProfilePicture.ContentLength));
 
             user.Picture = image;
 
@@ -124,7 +145,7 @@ namespace SocialApp.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", "Users");
             }
             AddErrors(result);
             return View(model);
@@ -134,7 +155,7 @@ namespace SocialApp.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
-            {
+            { 
                 _userManager.Dispose();
                 _userManager = null;
             }
@@ -143,9 +164,6 @@ namespace SocialApp.Controllers
         }
 
 #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -170,17 +188,6 @@ namespace SocialApp.Controllers
                 return user.PasswordHash != null;
             }
             return false;
-        }
-
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
         }
 
 #endregion

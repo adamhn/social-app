@@ -1,0 +1,1 @@
+﻿1>------ Build started: Project: SocialApp, Configuration: Debug Any CPU ------

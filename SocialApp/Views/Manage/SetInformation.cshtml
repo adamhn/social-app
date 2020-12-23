@@ -1,0 +1,30 @@
+﻿@model SocialApp.Models.SetInformationViewModel
+
+@{
+    ViewBag.Title = "Set Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+
+    @using (Html.BeginForm("SetInformation", "Manage"))
+    {
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(x => x.Firstname, new { @for = "inputFirstname" })
+                @Html.TextBoxFor(x => x.Firstname, new { @class = "form-control", id = "inputFirstname" })
+                @Html.ValidationMessageFor(x => x.Firstname, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(x => x.Lastname, new { @for = "inputLastname" })
+                @Html.TextBoxFor(x => x.Lastname, new { @class = "form-control", id = "inputLastname" })
+                @Html.ValidationMessageFor(x => x.Lastname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+        @Html.ActionLink("Update Profile", "Index", null, new { @class = "btn btn-primary" })
+    }
+</div>

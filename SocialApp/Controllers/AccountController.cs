@@ -118,7 +118,6 @@ namespace SocialApp.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                    
-                    //TODO:  Redirect to profile
                     return RedirectToAction("Index", "Users");
                 }
                 AddErrors(result);
