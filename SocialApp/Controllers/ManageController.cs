@@ -61,11 +61,18 @@ namespace SocialApp.Controllers
         }
 
 
-        public ActionResult SetInformation()
+        public async Task<ActionResult> SetInformation()
         {
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             var relationshipStatus = DbContext.RelationshipStatus.ToList();
+
             var viewModel = new SetInformationViewModel
             {
+                Firstname = currentUser.Firstname,
+                Lastname = currentUser.Lastname,
+                Work = currentUser.Work,
+                Study = currentUser.Study,
+                BirthDate = currentUser.BirthDate,
                 RelationshipStatus = relationshipStatus
             };
             return View(viewModel);
@@ -80,7 +87,17 @@ namespace SocialApp.Controllers
                 return View(model);
             }
 
-            return View(model);
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            currentUser.Firstname = model.Firstname;
+            currentUser.Lastname = model.Lastname;
+            currentUser.Work = model.Work;
+            currentUser.Study = model.Study;
+            currentUser.BirthDate = model.BirthDate;
+            currentUser.RelationshipStatusId = model.RelationshipStatusId;
+
+            await UserManager.UpdateAsync(currentUser);
+
+            return RedirectToAction("Details", "Users", new { userId = currentUser.Id });
         }
 
         // GET: /Manage/SetPhoto
@@ -110,7 +127,7 @@ namespace SocialApp.Controllers
             // save changes to database
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Users");
+            return RedirectToAction("Details", "Users", new { userId = user.Id });
         }
 
 

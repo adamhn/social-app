@@ -12,46 +12,37 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 @Html.LabelFor(x => x.Firstname, new { @for = "inputFirstname" })
-                @Html.TextBoxFor(x => x.Firstname, new { @class = "form-control", id = "inputFirstname" })
+                @Html.TextBoxFor(x => x.Firstname, new { @class = "form-control", id = "inputFirstname", Value = @Model.Firstname })
                 @Html.ValidationMessageFor(x => x.Firstname, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(x => x.Lastname, new { @for = "inputLastname" })
-                @Html.TextBoxFor(x => x.Lastname, new { @class = "form-control", id = "inputLastname" })
+                @Html.TextBoxFor(x => x.Lastname, new { @class = "form-control", id = "inputLastname", Value = @Model.Lastname })
                 @Html.ValidationMessageFor(x => x.Lastname, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 @Html.LabelFor(x => x.Work, new { @for = "inputWork"})
-                @Html.TextBoxFor(x => x.Work, new { @class = "form-control", id = "inputWork" })
+                @Html.TextBoxFor(x => x.Work, new { @class = "form-control", id = "inputWork", Value = @Model.Work })
                 @Html.ValidationMessageFor(x => x.Work, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(x => x.Study, new { @for = "inputStudy"})
-                @Html.TextBoxFor(x => x.Study, new { @class = "form-control", id = "inputStudy" })
+                @Html.TextBoxFor(x => x.Study, new { @class = "form-control", id = "inputStudy", Value = @Model.Study })
                 @Html.ValidationMessageFor(x => x.Study, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 @Html.LabelFor(x => x.BirthDate, new { @for = "inputBirthdate"})
-                @Html.TextBoxFor(x => x.BirthDate, new { @class = "form-control", id = "inputBirthdate", type = "date" })
+                @Html.TextBoxFor(x => x.BirthDate, new { @class = "form-control", id = "inputBirthdate", type = "date", Value = @Model.BirthDate.ToString("yyyy-MM-dd") })
                 @Html.ValidationMessageFor(x => x.BirthDate, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
-                @Html.LabelFor(x => x.BirthDate, new { @for = "inputRelationshipStatus"})
+                @Html.LabelFor(x => x.RelationshipStatusId, new { @for = "inputRelationshipStatus"})
+                @Html.DropDownListFor(x => x.RelationshipStatusId, new SelectList(Model.RelationshipStatus, "Id", "Status"), new { @class="custom-select", id= "inputRelationshipStatus" })
             </div>
-            
-            @Html.LabelFor(x => x.RelationshipStatusId, new { @for = "inputRelationshipStatus"})
-            
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
         </div>
         <input type="submit" value="Update Profile" class="btn btn-primary" />
     }
