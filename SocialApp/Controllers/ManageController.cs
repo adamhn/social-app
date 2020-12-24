@@ -109,25 +109,19 @@ namespace SocialApp.Controllers
 
         // POST: /Manage/SetPhoto
         [HttpPost]
-        public ActionResult SetPhoto(HttpPostedFileBase ProfilePicture)
+        public async Task<ActionResult> SetPhoto(HttpPostedFileBase profilePicture)
         {
-            // get EF Database (maybe different way in your applicaiton)
-            var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-
-            // find the user. I am skipping validations and other checks.
-            var userid = User.Identity.GetUserId();
-            var user = db.Users.Where(x => x.Id == userid).FirstOrDefault();
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             // convert image stream to byte array
-            byte[] image = new byte[ProfilePicture.ContentLength];
-            ProfilePicture.InputStream.Read(image, 0, Convert.ToInt32(ProfilePicture.ContentLength));
+            var image = new byte[profilePicture.ContentLength];
+            await profilePicture.InputStream.ReadAsync(image, 0, Convert.ToInt32(profilePicture.ContentLength));
 
-            user.Picture = image;
+            currentUser.Picture = image;
 
-            // save changes to database
-            db.SaveChanges();
+            await UserManager.UpdateAsync(currentUser);
 
-            return RedirectToAction("Details", "Users", new { userId = user.Id });
+            return RedirectToAction("Details", "Users", new { userId = currentUser.Id });
         }
 
 
