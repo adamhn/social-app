@@ -39,6 +39,10 @@ namespace SocialApp.ViewModels
         [Required]
         [Display(Name = "Relationship Status")]
         public IEnumerable<RelationshipStatus> RelationshipStatus { get; set; }
+
+        [Required]
+        [Display(Name = "Relationship Status")]
+        public byte RelationshipStatusId { get; set; }
     }
 
     public class ChangePasswordViewModel
