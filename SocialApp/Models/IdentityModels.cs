@@ -13,15 +13,25 @@ namespace SocialApp.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        [StringLength(255)]
+        [StringLength(55)]
         public string Firstname { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(55)]
         public string Lastname { get; set; }
+
+        [StringLength(55)]
+        public string Work { get; set; }
+
+        [StringLength(55)]
+        public string Study { get; set; }
 
         [Required]
         public DateTime BirthDate { get; set; }
+
+        public RelationshipStatus RelationshipStatus { get; set; }
+
+        public byte? RelationshipStatusId { get; set; }
 
         public byte[] Picture { get; set; }
 

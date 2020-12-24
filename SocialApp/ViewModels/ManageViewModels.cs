@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -11,14 +12,30 @@ namespace SocialApp.Models
     {
         [Required]
         [Display(Name = "Firstname")]
-        [StringLength(100)]
+        [DataType(DataType.Text)]
+        [StringLength(55)]
         public string Firstname { get; set; }
 
         [Required]
         [Display(Name = "Firstname")]
         [DataType(DataType.Text)]
-        [StringLength(100, ErrorMessage = "{0} cannot be more then 100 characters long")]
+        [StringLength(55, ErrorMessage = "{0} cannot be more then 100 characters long")]
         public string Lastname { get; set; }
+
+        [Display(Name = "Work Company")]
+        [StringLength(55)]
+        public string Work { get; set; }
+
+        [Display(Name = "Studying at")]
+        [StringLength(55)]
+        public string Study { get; set; }
+
+        [Required]
+        [MinimumAge(18)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Birthdate")]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
     }
 
     public class SetPhotoViewModel { }

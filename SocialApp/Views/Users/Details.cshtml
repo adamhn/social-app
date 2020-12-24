@@ -1,4 +1,5 @@
-﻿@model SocialApp.ViewModels.UserDetailsViewModel
+﻿@using SocialApp.Helpers
+@model SocialApp.ViewModels.UserDetailsViewModel
 
 @{
     ViewBag.Title = Model.GetFullName();
@@ -9,7 +10,9 @@
 
 <ul>
     <li>@Model.User.Email</li>
-    <li>@Model.User.BirthDate</li>
+    <li>@Model.User.BirthDate.Age()</li>
+    <li>@Model.User.Study</li>
+    <li>@Model.User.Work</li>
 </ul>
 
 <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=Model.User.Id })" />

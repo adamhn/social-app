@@ -172,6 +172,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Migrations\202012172233386_InitialModel.cs" />
     <Compile Include="Migrations\202012172233386_InitialModel.designer.cs">
       <DependentUpon>202012172233386_InitialModel.cs</DependentUpon>
@@ -208,7 +209,20 @@
     <Compile Include="Migrations\202012201826406_modelcleanup.designer.cs">
       <DependentUpon>202012201826406_modelcleanup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012241206185_UpdateModels.cs" />
+    <Compile Include="Migrations\202012241206185_UpdateModels.designer.cs">
+      <DependentUpon>202012241206185_UpdateModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012241248323_RelationshipStatus.cs" />
+    <Compile Include="Migrations\202012241248323_RelationshipStatus.designer.cs">
+      <DependentUpon>202012241248323_RelationshipStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012241251530_SeedRelationshipStatus.cs" />
+    <Compile Include="Migrations\202012241251530_SeedRelationshipStatus.designer.cs">
+      <DependentUpon>202012241251530_SeedRelationshipStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\RelationshipStatus.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
@@ -406,6 +420,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012201826406_modelcleanup.resx">
       <DependentUpon>202012201826406_modelcleanup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012241206185_UpdateModels.resx">
+      <DependentUpon>202012241206185_UpdateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012241248323_RelationshipStatus.resx">
+      <DependentUpon>202012241248323_RelationshipStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012241251530_SeedRelationshipStatus.resx">
+      <DependentUpon>202012241251530_SeedRelationshipStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
