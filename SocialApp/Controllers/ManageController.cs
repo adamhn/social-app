@@ -64,8 +64,11 @@ namespace SocialApp.Controllers
         public ActionResult SetInformation()
         {
             var relationshipStatus = DbContext.RelationshipStatus.ToList();
-
-            return View();
+            var viewModel = new SetInformationViewModel
+            {
+                RelationshipStatus = relationshipStatus
+            };
+            return View(viewModel);
         }
 
         // POST: /Manage/SetInformation

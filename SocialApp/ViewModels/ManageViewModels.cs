@@ -35,9 +35,11 @@ namespace SocialApp.ViewModels
         [Display(Name = "Birthdate")]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
-    }
 
-    public class SetPhotoViewModel { }
+        [Required]
+        [Display(Name = "Relationship Status")]
+        public IEnumerable<RelationshipStatus> RelationshipStatus { get; set; }
+    }
 
     public class ChangePasswordViewModel
     {
