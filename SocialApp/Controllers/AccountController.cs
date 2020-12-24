@@ -112,7 +112,8 @@ namespace SocialApp.Controllers
                     BirthDate = model.BirthDate,
                     Firstname = model.Firstname, 
                     Lastname = model.Lastname,
-                    Picture = defaultImageBytes
+                    Picture = defaultImageBytes,
+                    RelationshipStatusId = 1 // Assign it to default relationship status which is 'not set'
                     };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

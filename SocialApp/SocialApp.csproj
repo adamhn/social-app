@@ -221,6 +221,10 @@
     <Compile Include="Migrations\202012241251530_SeedRelationshipStatus.designer.cs">
       <DependentUpon>202012241251530_SeedRelationshipStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012241417197_UpdateRelationshipStatusId.cs" />
+    <Compile Include="Migrations\202012241417197_UpdateRelationshipStatusId.designer.cs">
+      <DependentUpon>202012241417197_UpdateRelationshipStatusId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\RelationshipStatus.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -429,6 +433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012241251530_SeedRelationshipStatus.resx">
       <DependentUpon>202012241251530_SeedRelationshipStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012241417197_UpdateRelationshipStatusId.resx">
+      <DependentUpon>202012241417197_UpdateRelationshipStatusId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

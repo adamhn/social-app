@@ -31,7 +31,7 @@ namespace SocialApp.Models
 
         public RelationshipStatus RelationshipStatus { get; set; }
 
-        public byte? RelationshipStatusId { get; set; }
+        public byte RelationshipStatusId { get; set; }
 
         public byte[] Picture { get; set; }
 
