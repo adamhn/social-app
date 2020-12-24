@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using SocialApp.Models;
 
-namespace SocialApp.Models
+namespace SocialApp.ViewModels
 {
     public class LoginViewModel
     {

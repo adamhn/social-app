@@ -46,10 +46,9 @@ namespace SocialApp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<RelationshipStatus> RelationshipStatus { get; set; }
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+            : base("DefaultConnection", throwIfV1Schema: false) { }
 
         public static ApplicationDbContext Create()
         {

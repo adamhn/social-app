@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SocialApp.Models;
+using SocialApp.ViewModels;
 
 namespace SocialApp.Controllers
 {
@@ -16,9 +17,11 @@ namespace SocialApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        protected ApplicationDbContext DbContext { get; set; }
 
         public ManageController()
         {
+            this.DbContext = new ApplicationDbContext();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -54,21 +57,14 @@ namespace SocialApp.Controllers
         // GET: /Manage/
         public ActionResult Index()
         {
-            //var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
-            //var model = new IndexViewModel
-            //{
-            //    CurrentUser = currentUser,
-            //    Firstname = currentUser.Firstname,
-            //    Lastname = currentUser.Lastname
-            //};
-
-            return View();
+            return RedirectToAction("SetInformation", "Manage");
         }
 
 
         public ActionResult SetInformation()
         {
+            var relationshipStatus = DbContext.RelationshipStatus.ToList();
+
             return View();
         }
 
@@ -154,6 +150,8 @@ namespace SocialApp.Controllers
                 _userManager.Dispose();
                 _userManager = null;
             }
+
+            DbContext.Dispose();
 
             base.Dispose(disposing);
         }

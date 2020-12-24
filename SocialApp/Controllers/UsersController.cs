@@ -2,6 +2,7 @@
 using SocialApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -33,7 +34,7 @@ namespace SocialApp.Controllers
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            var viewModel = new ViewModels.IndexViewModel
+            var viewModel = new ViewModels.UsersViewModel
             {
                 Users = DbContext.Users.OrderBy(u => u.Firstname).ToList(),
                 CurrentUser = currentUser
@@ -49,7 +50,8 @@ namespace SocialApp.Controllers
         
         public ActionResult Details(string userId)
         {
-            var user = DbContext.Users.SingleOrDefault(u => u.Id == userId);
+            // eager loading -- we tell it to include relationshipstatus data as well
+            var user = DbContext.Users.Include(u => u.RelationshipStatus).SingleOrDefault(u => u.Id == userId); 
             if (user == null) return HttpNotFound();
             return View(new UserDetailsViewModel { User = user });
         }

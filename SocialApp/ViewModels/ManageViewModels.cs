@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using SocialApp.Models;
 
-namespace SocialApp.Models
+namespace SocialApp.ViewModels
 {
-    public class IndexViewModel { }
-
     public class SetInformationViewModel
     {
         [Required]
