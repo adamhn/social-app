@@ -23,6 +23,11 @@ namespace SocialApp.Controllers
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            DbContext.Dispose();
+        }
+
         [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
@@ -44,7 +49,7 @@ namespace SocialApp.Controllers
         
         public ActionResult Details(string userId)
         {
-            var user = DbContext.Users.Find(userId);
+            var user = DbContext.Users.SingleOrDefault(u => u.Id == userId);
             if (user == null) return HttpNotFound();
             return View(new UserDetailsViewModel { User = user });
         }
