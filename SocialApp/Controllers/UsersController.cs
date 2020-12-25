@@ -30,19 +30,26 @@ namespace SocialApp.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchText)
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             var viewModel = new ViewModels.UsersViewModel
             {
-                Users = DbContext.Users.OrderBy(u => u.Firstname).ToList(),
+                Users = DbContext.Users
+                    .Where(u => u.Firstname.Contains(searchText) || searchText == null)
+                    .OrderBy(u => u.Firstname)
+                    .ToList(),
                 CurrentUser = currentUser
             };
 
             if (currentUser == null) return View(viewModel);
 
-            viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).OrderBy(u => u.Firstname).ToList();
+            //viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).OrderBy(u => u.Firstname).ToList();
+            viewModel.Users = DbContext.Users
+                .Where(x => (x.Firstname.Contains(searchText) || searchText == null) && x.Id != currentUser.Id)
+                .OrderBy(u => u.Firstname)
+                .ToList();
 
             return View(viewModel); 
         }

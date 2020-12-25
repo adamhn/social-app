@@ -18,12 +18,28 @@ else
     <h3 class="page-title">Hi there, welcome to SocialMeet.</h3>
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            @using (Html.BeginForm("Index", "Users", FormMethod.Get))
+            {
+                <div class="input-group input-group-lg mb-3">
+                    @Html.TextBox("searchText", null, new { @class = "form-control", placeholder = "Search", ariaDescribedby = "button-addon2" })
+                    <div class="input-group-append">
+                        <input class="btn btn-outline-primary btn-lg" type="submit" value="Search" id="button-addon2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
     @foreach (var user in Model.Users)
     {
         <div class="explore-user-item col mb-3">
-            <a class="text-dark" href="@Url.Action("Details", "Users", new { userId=user.Id })">
-                <img class="card-img-top" src="@Url.Action("GetUserPhoto", "Users" , new { UserId=user.Id })" />
+            <a class="text-dark" href="@Url.Action("Details", "Users", new { userId = user.Id })">
+                <img class="card-img-top user-item-image" src="@Url.Action("GetUserPhoto", "Users", new { UserId = user.Id })"/>
                 <h6 class="explore-user-name">@user.Firstname @user.Lastname</h6>
             </a>
         </div>

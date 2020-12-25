@@ -52,6 +52,11 @@ nav li {
     margin-right: 20px;
 }
 
+.user-item-image {
+    max-width: 198px;
+    max-height: 198px;
+}
+
 /*::::::::::::::: PROFILE "Details" PAGE :::::::::::::::*/
 .profile-details-image {
     max-width: 225px;
