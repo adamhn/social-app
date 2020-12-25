@@ -8,8 +8,8 @@
 @if (Request.IsAuthenticated)
 {
     <div class="users-profile-container">
-        <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=@Model.CurrentUser.Id })" alt="Profile Picture" class="users-profile-thumbnail">
-        <h3 class="page-title">Hi <strong>@Model.CurrentUser.Firstname</strong>, let's find new people.</h3>
+        <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=@Model.CurrentUser.Id })" alt="Profile Picture" class="users-profile-thumbnail rounded-circle">
+        <h3 class="page-title">Hi <strong>@Html.ActionLink(@Model.CurrentUser.Firstname, "Details", new { userId = @Model.CurrentUser.Id}, new { @class = "text-primary"})</strong>, let's find new people.</h3>
     </div>
     <hr />
 }

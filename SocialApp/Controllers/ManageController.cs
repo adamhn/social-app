@@ -73,7 +73,8 @@ namespace SocialApp.Controllers
                 Work = currentUser.Work,
                 Study = currentUser.Study,
                 BirthDate = currentUser.BirthDate,
-                RelationshipStatus = relationshipStatus
+                RelationshipStatus = relationshipStatus,
+                RelationshipStatusId = currentUser.RelationshipStatusId
             };
             return View(viewModel);
         }

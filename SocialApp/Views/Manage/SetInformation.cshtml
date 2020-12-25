@@ -41,7 +41,7 @@
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(x => x.RelationshipStatusId, new { @for = "inputRelationshipStatus"})
-                @Html.DropDownListFor(x => x.RelationshipStatusId, new SelectList(Model.RelationshipStatus, "Id", "Status"), new { @class="custom-select", id= "inputRelationshipStatus" })
+                @Html.DropDownList("RelationshipStatusId", new SelectList(Model.RelationshipStatus, "Id", "Status", @Model.RelationshipStatusId), new { @class = "custom-select", id = "inputRelationshipStatus" })
             </div>
         </div>
         <input type="submit" value="Update Profile" class="btn btn-primary" />

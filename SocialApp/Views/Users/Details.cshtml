@@ -8,50 +8,39 @@
 }
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=Model.User.Id })" alt="Profile Image" class="profile-details-image h-100 w-auto" />
+    <div class="row mb-4">
+        <div class="col-md-3 pt-4 text-center">
+            <img src="@Url.Action("GetUserPhoto", "Users", new {UserId = Model.User.Id})" alt="Profile Image" class="profile-details-image rounded-circle h-auto w-100" />
         </div>
-        <div class="col-md-6">
-            <h2>@Model.GetFullName()</h2>
+        <div class="col-md-9 pt-4 pl-4 pb-4 bg-light">
+            <h2 class="mb-4">@Model.GetFullName()</h2>
 
-            @if (Model.User.Work == null)
-            {<p>Jobb: <em>Ej satt</em></p> }
-            else
-            {
-                <p>Jobbar på <strong>@Model.User.Work</strong></p>
-            }
+            @if (Model.User.Work == null) {<p>Jobb: <em>Ej satt</em></p>}
+            else { <p>Jobbar på <strong>@Model.User.Work</strong></p> }
 
-            @if (Model.User.Study == null)
-            {<p>Studier: <em>Ej satt</em></p> }
-            else
-            {
-                <p>Har studerat på <strong>@Model.User.Study</strong></p>
-            }
+            @if (Model.User.Study == null) {<p>Studier: <em>Ej satt</em></p> }
+            else { <p>Har studerat på <strong>@Model.User.Study</strong></p> }
 
-            @if (Model.User.RelationshipStatus.Status == "-")
-            {<p>Relation status: <em>Ej satt</em></p> }
-            else
-            {
-                <p>Är <strong>@Model.User.RelationshipStatus.Status</strong></p>
-            }
+            @if (Model.User.RelationshipStatus.Status == "-") {<p>Relation status: <em>Ej satt</em></p> }
+            else { <p>Är <strong>@Model.User.RelationshipStatus.Status</strong></p> }
 
             <p><strong>@Model.User.BirthDate.Age()</strong> år gammal.</p>
         </div>
-    </div>
-    <div class="row mt-3 mb-5">
-        @if (Model.User.Id == User.Identity.GetUserId())
-        {
-            @Html.ActionLink("Change Image", "SetPhoto", "Manage", null,  new { @class= "btn btn-link btn-sm pl-3" })
-            @Html.ActionLink("Change Profile", "SetInformation", "Manage", null,  new { @class= "btn btn-link btn-sm" })
-        }
-        else
-        {
-            <button class="btn btn-primary btn-sm ml-3">Skicka Vänförfråga</button>
-        }
+        <div class="w-100"></div>
+        <div class="col-md-3 mt-1 text-center">
+            @if (Model.User.Id == User.Identity.GetUserId())
+            {
+                @Html.ActionLink("Change Image", "SetPhoto", "Manage", null, new { @class = "btn btn-link btn-sm" })
+                @Html.ActionLink("Change Profile", "SetInformation", "Manage", null, new { @class = "btn btn-link btn-sm" })
+            }
+            else
+            {
+                <button class="btn btn-primary btn-sm">Skicka Vänförfråga</button>
+            }
+        </div>
     </div>
     <hr/>
-    <div class="row mt-5">
+    <div class="row mt-4 mb-5">
         <div class="col-md-6">
             <p>Wall</p>
         </div>
