@@ -48,12 +48,19 @@ namespace SocialApp.Controllers
         }
 
         
+        // GET Users/Details/{userId}
         public ActionResult Details(string userId)
         {
             // eager loading -- we tell it to include relationshipstatus data as well
             var user = DbContext.Users.Include(u => u.RelationshipStatus).SingleOrDefault(u => u.Id == userId); 
             if (user == null) return HttpNotFound();
-            return View(new UserDetailsViewModel { User = user });
+            
+            var viewModel = new UserDetailsViewModel
+            {
+                User = user
+            };
+
+            return View(viewModel);
         }
 
         [AllowAnonymous]
