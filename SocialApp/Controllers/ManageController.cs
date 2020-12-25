@@ -59,8 +59,8 @@ namespace SocialApp.Controllers
         {
             return RedirectToAction("SetInformation", "Manage");
         }
-
-
+        
+        // GET: /Manage/SetInformation
         public async Task<ActionResult> SetInformation()
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());

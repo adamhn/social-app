@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=Model.User.Id })" alt="Profile Image" class="h-100 w-auto" />
+            <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=Model.User.Id })" alt="Profile Image" class="profile-details-image h-100 w-auto" />
         </div>
         <div class="col-md-6">
             <h2>@Model.GetFullName()</h2>
@@ -42,12 +42,12 @@
     <div class="row mt-3 mb-5">
         @if (Model.User.Id == User.Identity.GetUserId())
         {
-            <button class="btn btn-link btn-sm pl-3">Change Image</button>
-            <button class="btn btn-link btn-sm">Change Profile</button>
+            @Html.ActionLink("Change Image", "SetPhoto", "Manage", null,  new { @class= "btn btn-link btn-sm pl-3" })
+            @Html.ActionLink("Change Profile", "SetInformation", "Manage", null,  new { @class= "btn btn-link btn-sm" })
         }
         else
         {
-            <button class="btn btn-primary">Skicka Vänförfråga</button>
+            <button class="btn btn-primary btn-sm ml-3">Skicka Vänförfråga</button>
         }
     </div>
     <hr/>
