@@ -225,7 +225,77 @@
     <Compile Include="Migrations\202012241417197_UpdateRelationshipStatusId.designer.cs">
       <DependentUpon>202012241417197_UpdateRelationshipStatusId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012261214414_AddFriendRequestState.cs" />
+    <Compile Include="Migrations\202012261214414_AddFriendRequestState.designer.cs">
+      <DependentUpon>202012261214414_AddFriendRequestState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261215487_SeedFriendRequestState.cs" />
+    <Compile Include="Migrations\202012261215487_SeedFriendRequestState.designer.cs">
+      <DependentUpon>202012261215487_SeedFriendRequestState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261240200_AddFriendAndUpdateFlag.cs" />
+    <Compile Include="Migrations\202012261240200_AddFriendAndUpdateFlag.designer.cs">
+      <DependentUpon>202012261240200_AddFriendAndUpdateFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261245479_UpdateFriendsModel.cs" />
+    <Compile Include="Migrations\202012261245479_UpdateFriendsModel.designer.cs">
+      <DependentUpon>202012261245479_UpdateFriendsModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261342475_UpdateIdentityModel.cs" />
+    <Compile Include="Migrations\202012261342475_UpdateIdentityModel.designer.cs">
+      <DependentUpon>202012261342475_UpdateIdentityModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261401105_UpdateFriendAndIdentity.cs" />
+    <Compile Include="Migrations\202012261401105_UpdateFriendAndIdentity.designer.cs">
+      <DependentUpon>202012261401105_UpdateFriendAndIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261410492_UpdateFriendAndIdentity1.cs" />
+    <Compile Include="Migrations\202012261410492_UpdateFriendAndIdentity1.designer.cs">
+      <DependentUpon>202012261410492_UpdateFriendAndIdentity1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261411582_UpdateIdentity.cs" />
+    <Compile Include="Migrations\202012261411582_UpdateIdentity.designer.cs">
+      <DependentUpon>202012261411582_UpdateIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261414159_UpdateIdentity1.cs" />
+    <Compile Include="Migrations\202012261414159_UpdateIdentity1.designer.cs">
+      <DependentUpon>202012261414159_UpdateIdentity1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261414535_UpdateFriend.cs" />
+    <Compile Include="Migrations\202012261414535_UpdateFriend.designer.cs">
+      <DependentUpon>202012261414535_UpdateFriend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261420105_UpdateFriend1.cs" />
+    <Compile Include="Migrations\202012261420105_UpdateFriend1.designer.cs">
+      <DependentUpon>202012261420105_UpdateFriend1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261422461_UpdateFriend2.cs" />
+    <Compile Include="Migrations\202012261422461_UpdateFriend2.designer.cs">
+      <DependentUpon>202012261422461_UpdateFriend2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261428593_UpdateFriendFriendId.cs" />
+    <Compile Include="Migrations\202012261428593_UpdateFriendFriendId.designer.cs">
+      <DependentUpon>202012261428593_UpdateFriendFriendId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261430441_UpdateFriendFriendIdKey.cs" />
+    <Compile Include="Migrations\202012261430441_UpdateFriendFriendIdKey.designer.cs">
+      <DependentUpon>202012261430441_UpdateFriendFriendIdKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261437350_UpdateMigraitonKeysAndIdentityModel.cs" />
+    <Compile Include="Migrations\202012261437350_UpdateMigraitonKeysAndIdentityModel.designer.cs">
+      <DependentUpon>202012261437350_UpdateMigraitonKeysAndIdentityModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261448025_FriendModifyPrimaryKey.cs" />
+    <Compile Include="Migrations\202012261448025_FriendModifyPrimaryKey.designer.cs">
+      <DependentUpon>202012261448025_FriendModifyPrimaryKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012261454364_FriendModifyPrimaryKey1.cs" />
+    <Compile Include="Migrations\202012261454364_FriendModifyPrimaryKey1.designer.cs">
+      <DependentUpon>202012261454364_FriendModifyPrimaryKey1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Friend.cs" />
+    <Compile Include="Models\Enums\FriendRequestFlag.cs" />
     <Compile Include="Models\RelationshipStatus.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -436,6 +506,57 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012241417197_UpdateRelationshipStatusId.resx">
       <DependentUpon>202012241417197_UpdateRelationshipStatusId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261214414_AddFriendRequestState.resx">
+      <DependentUpon>202012261214414_AddFriendRequestState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261215487_SeedFriendRequestState.resx">
+      <DependentUpon>202012261215487_SeedFriendRequestState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261240200_AddFriendAndUpdateFlag.resx">
+      <DependentUpon>202012261240200_AddFriendAndUpdateFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261245479_UpdateFriendsModel.resx">
+      <DependentUpon>202012261245479_UpdateFriendsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261342475_UpdateIdentityModel.resx">
+      <DependentUpon>202012261342475_UpdateIdentityModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261401105_UpdateFriendAndIdentity.resx">
+      <DependentUpon>202012261401105_UpdateFriendAndIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261410492_UpdateFriendAndIdentity1.resx">
+      <DependentUpon>202012261410492_UpdateFriendAndIdentity1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261411582_UpdateIdentity.resx">
+      <DependentUpon>202012261411582_UpdateIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261414159_UpdateIdentity1.resx">
+      <DependentUpon>202012261414159_UpdateIdentity1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261414535_UpdateFriend.resx">
+      <DependentUpon>202012261414535_UpdateFriend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261420105_UpdateFriend1.resx">
+      <DependentUpon>202012261420105_UpdateFriend1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261422461_UpdateFriend2.resx">
+      <DependentUpon>202012261422461_UpdateFriend2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261428593_UpdateFriendFriendId.resx">
+      <DependentUpon>202012261428593_UpdateFriendFriendId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261430441_UpdateFriendFriendIdKey.resx">
+      <DependentUpon>202012261430441_UpdateFriendFriendIdKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261437350_UpdateMigraitonKeysAndIdentityModel.resx">
+      <DependentUpon>202012261437350_UpdateMigraitonKeysAndIdentityModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261448025_FriendModifyPrimaryKey.resx">
+      <DependentUpon>202012261448025_FriendModifyPrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012261454364_FriendModifyPrimaryKey1.resx">
+      <DependentUpon>202012261454364_FriendModifyPrimaryKey1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

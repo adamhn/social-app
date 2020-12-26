@@ -17,8 +17,9 @@ namespace SocialApp.ViewModels
 
     public class UserDetailsViewModel
     {
-        [Required]
-        public ApplicationUser User { get; set; }
+        [Required] public ApplicationUser User { get; set; }
+
+        [Required] public FriendRequestFlag FriendRequestFlag { get; set; }
 
         public string GetFullName()
         {

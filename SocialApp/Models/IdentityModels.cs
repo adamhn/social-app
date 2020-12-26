@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -46,6 +48,7 @@ namespace SocialApp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Friend> Friends { get; set; }
         public DbSet<RelationshipStatus> RelationshipStatus { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false) { }

@@ -56,18 +56,50 @@ namespace SocialApp.Controllers
 
         
         // GET Users/Details/{userId}
-        public ActionResult Details(string userId)
+        public async Task<ActionResult> Details(string userId)
         {
-            // eager loading -- we tell it to include relationshipstatus data as well
-            var user = DbContext.Users.Include(u => u.RelationshipStatus).SingleOrDefault(u => u.Id == userId); 
-            if (user == null) return HttpNotFound();
-            
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var detailsUser = DbContext.Users.Include(u => u.RelationshipStatus).SingleOrDefault(u => u.Id == userId);
+            var friends = DbContext.Friends.ToList();
+            var friend =
+                friends.SingleOrDefault(f => (f.RequestedToId == userId) && (f.RequestedById == currentUser.Id));
+
+            if (detailsUser == null) return HttpNotFound();
+
+            var friendRequestFlag = FriendRequestFlag.None;
+
+            if (friend != null)
+                friendRequestFlag = friend.FriendRequestFlag;
+
             var viewModel = new UserDetailsViewModel
             {
-                User = user
+                User = detailsUser,
+                FriendRequestFlag = friendRequestFlag
             };
 
             return View(viewModel);
+        }
+
+        // GET Users/SendFriendRequest/{friendId}
+        public async Task<ActionResult> SendFriendRequest(string friendId)
+        {
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var friendUser = DbContext.Users.SingleOrDefault(u => u.Id == friendId);
+
+            if (friendUser == null) return RedirectToAction("Details", new { userId = friendId });
+
+            var newFriend = new Friend
+            {
+                RequestedById = currentUser.Id,
+                RequestedToId = friendUser.Id,
+                FriendRequestFlag = FriendRequestFlag.Awaiting,
+                RequestTime = DateTime.Now
+            };
+
+            DbContext.Friends.Add(newFriend);
+            await DbContext.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { userId = friendId });
         }
 
         [AllowAnonymous]
