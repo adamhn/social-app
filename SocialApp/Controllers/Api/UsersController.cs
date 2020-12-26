@@ -5,47 +5,54 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SocialApp.Dtos;
 using SocialApp.Models;
 
 namespace SocialApp.Controllers.Api
 {
     public class UsersController : ApiController
     {
-        private ApplicationDbContext DbContext;
+        protected ApplicationDbContext DbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
 
         public UsersController()
         {
-            DbContext = new ApplicationDbContext();
+            this.DbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
 
         }
 
-        // GET /api/friends
-        public IEnumerable<Friend> GetFriends()
-        {
-            var loggedInUser = UserManager.FindById(User.Identity.GetUserId());
-            //var users = DbContext.Users.ToList();
-            var friends = DbContext.Friends.Where(f => 
-                    ((f.RequestedToId == loggedInUser.Id) || (f.RequestedById == loggedInUser.Id)) 
-                    && f.FriendRequestFlag == FriendRequestFlag.Approved).ToList();
+        //// GET /api/friends
+        //public IEnumerable<Friend> GetFriends()
+        //{
+        //    var loggedInUser = UserManager.FindById(User.Identity.GetUserId());
+        //    //var users = DbContext.Users.ToList();
+        //    var friends = DbContext.Friends.Where(f => 
+        //            ((f.RequestedToId == loggedInUser.Id) || (f.RequestedById == loggedInUser.Id)) 
+        //            && f.FriendRequestFlag == FriendRequestFlag.Approved).ToList();
 
-            return friends;
+        //    return DbContext.Friends.ToList();
+        //}
+
+        // GET /api/users
+        public IEnumerable<UserDto> GetUsers()
+        {
+            return DbContext.Users.ToList().Select(Mapper.Map<ApplicationUser, UserDto>);
         }
 
         // GET /api/user/1
-        public ApplicationUser GetUser(string id)
+        public UserDto GetUser(string id)
         {
             var user = DbContext.Users.SingleOrDefault(u => u.Id == id);
 
             if (user == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return user;
+            return Mapper.Map<ApplicationUser, UserDto>(user);
         }
-
 
     }
 }
