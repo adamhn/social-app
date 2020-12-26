@@ -54,5 +54,31 @@ namespace SocialApp.Controllers.Api
             return Mapper.Map<ApplicationUser, UserDto>(user);
         }
 
+        // POST /api/posts
+        //[HttpPost]
+        //public Post CreatePost(Post post)
+        //{
+        //    if (!ModelState.IsValid)
+        //        throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+        //    // Add post to context and save changes dbContext.saveChanges()
+        //    // return the newly created post
+        //}
+
+
+        // With mapper
+        // POST /api/posts
+        //[HttpPost]
+        //public PostDto CreatePost(PostDto postDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+        //    var post = Mapper.Map<PostDto, Post>(postDto);
+        //    DbContext.Posts.Add(post);
+        //    DbContext.SaveChanges();
+        //    postDto.Id = post.Id;
+        //    return postDto;
+        //}
     }
 }
