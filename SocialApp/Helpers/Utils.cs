@@ -18,6 +18,15 @@ namespace SocialApp.Helpers
             this.DbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
         }
+
+        /// <summary>
+        /// Searches in all matching friend request for the two parties
+        /// This to make sure we find a unique friend request no matter
+        /// who sent the friend request of the two parties.
+        /// </summary>
+        /// <param name="userIdOne">User one</param>
+        /// <param name="userIdTwo">User two</param>
+        /// <returns>A single friend request</returns>
         public Friend FindFriendRequestMatch(string userIdOne, string userIdTwo)
         {
             // Get all matching requests
@@ -38,6 +47,31 @@ namespace SocialApp.Helpers
             }
 
             return singleRequest;
+        }
+
+        /// <summary>
+        /// Get friends for user id
+        /// </summary>
+        /// <param name="userId">User Id to search friends for</param>
+        /// <returns>List of approved friends for param user id</returns>
+        public List<ApplicationUser> FindFriendsFor(string userId)
+        {
+            var approvedRequests = DbContext.Friends
+                .Where(f => 
+                            (f.RequestedById == userId || f.RequestedToId == userId) 
+                            && f.FriendRequestFlag == FriendRequestFlag.Approved).ToList();
+            var friends = new List<ApplicationUser>();
+
+            foreach (var approvedRequest in approvedRequests)
+            {
+                if (approvedRequest.RequestedById == userId)
+                    friends.Add(DbContext.Users.SingleOrDefault(u => u.Id == approvedRequest.RequestedToId));
+
+                if (approvedRequest.RequestedToId == userId)
+                    friends.Add(DbContext.Users.SingleOrDefault(u => u.Id == approvedRequest.RequestedById));
+            }
+            
+            return friends;
         }
     }
 }

@@ -63,23 +63,16 @@ namespace SocialApp.Controllers
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             var detailsUser = DbContext.Users.Include(u => u.RelationshipStatus).SingleOrDefault(u => u.Id == userId);
-            var friends = DbContext.Friends.ToList();
-            //var friend =
-            //    friends.SingleOrDefault(f => (f.RequestedToId == currentUser.Id) && (f.RequestedById == userId));
+            var friendRequest = Utils.FindFriendRequestMatch(userId, currentUser.Id);
+            var friends = Utils.FindFriendsFor(userId);
 
-            var friend = Utils.FindFriendRequestMatch(userId, currentUser.Id);
-
-            if (detailsUser == null) return HttpNotFound();
-
-            var friendRequestFlag = FriendRequestFlag.None;
-
-            if (friend != null)
-                friendRequestFlag = friend.FriendRequestFlag;
+            if (detailsUser == null || friendRequest == null) return HttpNotFound();
 
             var viewModel = new UserDetailsViewModel
             {
                 User = detailsUser,
-                FriendRequestFlag = friendRequestFlag
+                FriendRequestFlag = friendRequest.FriendRequestFlag,
+                Friends = friends
             };
 
             return View(viewModel);

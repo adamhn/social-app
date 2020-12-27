@@ -21,6 +21,8 @@ namespace SocialApp.ViewModels
 
         [Required] public FriendRequestFlag FriendRequestFlag { get; set; }
 
+        [Required] public List<ApplicationUser> Friends { get; set; }
+
         public string GetFullName()
         {
             return User.Firstname + " " + User.Lastname;

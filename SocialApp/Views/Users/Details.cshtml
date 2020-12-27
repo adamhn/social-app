@@ -64,14 +64,20 @@
     <hr />
     <div class="row mt-4 mb-5">
         <div class="col-md-6">
-            <p>Wall</p>
+            <h5 class="mb-4">Write a Post</h5>
+            @*@Html.TextAreaFor()*@
         </div>
         <div class="col-md-6">
-            <p>Friends</p>
-            @*@foreach (var friend in Model.User)
+            <h5 class="mb-4">Friends</h5>
+            <div class="d-flex flex-column p-2">
+                @foreach (var friend in Model.Friends)
                 {
-                    <p>@friend.RequestedTo.Firstname</p>
-                }*@
+                    <div class="d-flex flex-row mb-3">
+                        <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId = friend.Id })" alt="Profile Picture" class="users-profile-thumbnail rounded-circle">
+                        <p class="mt-2"><strong>@Html.ActionLink(friend.GetFullName(), "Details", "Users", new { userId = friend.Id }, new { @class = "text-dark" })</strong></p>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
