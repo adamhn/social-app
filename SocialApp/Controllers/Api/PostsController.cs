@@ -37,17 +37,21 @@ namespace SocialApp.Controllers.Api
         [Route("api/Posts/CreatePost")]
         public HttpResponseMessage CreatePost(Post post)
         {
+            var postedByUser = DbContext.Users.SingleOrDefault(u => u.Id == post.PostedById);
             post.PostedDatetime = DateTime.Now;
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || postedByUser == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            post.PostedByFullname = postedByUser.GetFullName();
 
             DbContext.Posts.Add(new Post
             {
                 Text = post.Text,
                 PostedById = post.PostedById,
                 PostedToId = post.PostedToId,
-                PostedDatetime = post.PostedDatetime
+                PostedDatetime = post.PostedDatetime,
+                PostedByFullname = post.PostedByFullname
             });
 
             DbContext.SaveChanges();

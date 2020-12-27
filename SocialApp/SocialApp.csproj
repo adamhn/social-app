@@ -183,7 +183,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\FriendsController.cs" />
     <Compile Include="Controllers\Api\PostsController.cs" />
-    <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\PartialsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -316,6 +315,10 @@
     <Compile Include="Migrations\202012271224469_AddPostModel.cs" />
     <Compile Include="Migrations\202012271224469_AddPostModel.designer.cs">
       <DependentUpon>202012271224469_AddPostModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012271458198_UpdatePostWithFullname.cs" />
+    <Compile Include="Migrations\202012271458198_UpdatePostWithFullname.designer.cs">
+      <DependentUpon>202012271458198_UpdatePostWithFullname.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friend.cs" />
@@ -586,6 +589,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012271224469_AddPostModel.resx">
       <DependentUpon>202012271224469_AddPostModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012271458198_UpdatePostWithFullname.resx">
+      <DependentUpon>202012271458198_UpdatePostWithFullname.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -118,15 +118,14 @@
                     data.sort(function(a, b) {
                         var c = new Date(a.PostedDatetime);
                         var d = new Date(b.PostedDatetime);
-                        return c-d;
+                        return d-c;
                     });
 
                     for (var i = 0; i < data.length; i++) {
-                        item = item + '<div id="post-item" class="pt-4 pl-3 pr-3 pb-2 mt-4 rounded-sm bg-light">';
+                        item = item + '<div id="post-item" class="pt-4 pl-3 pr-3 pb-4 mt-4 rounded-sm bg-light border">';
                         item = item + '<p>' + data[i].Text + '</p>';
-                        item = item + '<p class="mt-4"><em>' + "Written by --- " + '</em></p>';
-                        item = item + '<p><em>' + new Date(data[i].PostedDatetime).toLocaleString() + '</em></p>';
-                        item = item + '</div>';
+                        item = item + '<footer class="blockquote-footer">' + data[i].PostedByFullname + '';
+                        item = item + '<cite class="ml-2">' + new Date(data[i].PostedDatetime).toLocaleString() + '</cite></footer></div>';
                     }
 
                     $('#post-items').empty();
