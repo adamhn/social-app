@@ -24,7 +24,7 @@
                         </li>
                         <li>
                             <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#friendRequestModal">
-                                Friend Requests <span class="badge badge-light">@Model.Friends.Count()</span>
+                                Friend Requests <span class="badge badge-light">@Model.FriendRequests.Count()</span>
                             </button>
                             
                             <!-- Modal -->
@@ -38,16 +38,16 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="d-flex flex-column p-2">
+                                            <div id="friendRequests" class="d-flex flex-column p-2">
                                                 @foreach (var friendRequest in Model.FriendRequests)
                                                 {
-                                                    <div class="d-flex flex-row mb-3">
+                                                    <div class="d-flex flex-row mb-3" id="friendRequestItem">
                                                         <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId = friendRequest.Id })" alt="Profile Picture" class="users-profile-thumbnail rounded-circle">
                                                         <p class="mt-2"><strong>@Html.ActionLink(friendRequest.GetFullName(), "Details", "Users", new { userId = friendRequest.Id }, new { @class = "text-dark" })</strong></p>
                                                         
                                                         <div class="ml-auto mt-2">
-                                                            <button type="button" id="friendRequestAction" class="btn btn-sm btn-primary">Accept</button>
-                                                            <button type="button" id="friendRequestAction" class="btn btn-sm btn-outline-danger">Reject</button>
+                                                            <button type="button" data-friendRequest-user-id="@friendRequest.Id" class="btn btn-sm btn-primary js-accept">Accept</button>
+                                                            <button type="button" class="btn btn-sm btn-outline-danger js-reject">Reject</button>
                                                         </div>
                                                     </div>
                                                 }

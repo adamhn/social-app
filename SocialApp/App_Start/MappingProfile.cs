@@ -14,7 +14,6 @@ namespace SocialApp.App_Start
         {
             Mapper.CreateMap<ApplicationUser, UserDto>();
             //Mapper.CreateMap<UserDto, ApplicationUser>();
-
         }
     }
 }

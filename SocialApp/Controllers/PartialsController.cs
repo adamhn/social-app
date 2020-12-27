@@ -24,13 +24,21 @@ namespace SocialApp.Controllers
         }
 
         // GET: Navigation
+        [AllowAnonymous]
         public ActionResult Navigation()
         {
             var loggedInUser = UserManager.FindById(User.Identity.GetUserId());
+
+            if (loggedInUser == null)
+                return PartialView("_Navigation");
+
             var users = DbContext.Users.ToList();
             var currentUser = users.SingleOrDefault(u => u.Id == loggedInUser.Id);
             var friends = DbContext.Friends.Where(f => f.RequestedToId == loggedInUser.Id).ToList();
-            var friendRequests = friends.Select(friend => users.SingleOrDefault(u => u.Id == friend.RequestedById)).ToList();
+            var friendRequests = friends
+                .Where(friend => friend.FriendRequestFlag == FriendRequestFlag.Awaiting)
+                .Select(friend => users.SingleOrDefault(u => u.Id == friend.RequestedById))
+                .ToList();
 
             var viewModel = new NavigationViewModel
             {

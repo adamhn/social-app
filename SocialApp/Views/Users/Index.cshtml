@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using SocialApp.Models
 @model SocialApp.ViewModels.UsersViewModel
 
 @{
@@ -9,7 +10,7 @@
 {
     <div class="users-profile-container">
         <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId=@Model.CurrentUser.Id })" alt="Profile Picture" class="users-profile-thumbnail rounded-circle">
-        <h3 class="page-title">Hi <strong>@Html.ActionLink(@Model.CurrentUser.Firstname, "Details", new { userId = @Model.CurrentUser.Id}, new { @class = "text-primary"})</strong>, let's find new people.</h3>
+        <h3 class="page-title">Hi <strong>@Html.ActionLink(@Model.CurrentUser.Firstname, "Details", new { userId = @Model.CurrentUser.Id }, new { @class = "text-primary" })</strong>, let's find new people.</h3>
     </div>
     <hr />
 }
@@ -39,9 +40,41 @@ else
     {
         <div class="explore-user-item col mb-3">
             <a class="text-dark" href="@Url.Action("Details", "Users", new { userId = user.Id })">
-                <img class="card-img-top user-item-image" src="@Url.Action("GetUserPhoto", "Users", new { UserId = user.Id })"/>
+                <img class="card-img-top user-item-image" src="@Url.Action("GetUserPhoto", "Users", new { UserId = user.Id })" />
                 <h6 class="explore-user-name">@user.Firstname @user.Lastname</h6>
             </a>
         </div>
     }
 </div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#friendRequests .js-accept").on("click",
+                function() {
+                    var button = $(this);
+
+                    $.ajax({
+                        url: "/api/friends/UpdateFriendRequest/" + $(this).attr("data-friendRequest-user-id") + "/" + "@FriendRequestFlag.Approved.ToString()",
+                        method: "PUT",
+                        success: function() {
+                            button.parents("#friendRequestItem").remove();
+                        }
+                    });
+                });
+
+            $("#friendRequests .js-reject").on("click",
+                function () {
+                    var button = $(this);
+
+                    $.ajax({
+                        url: "/api/friends/UpdateFriendRequest/" + $(this).attr("data-friendRequest-user-id") + "/" + "@FriendRequestFlag.Rejected.ToString()",
+                        method: "PUT",
+                        success: function() {
+                            button.parents("#friendRequestItem").remove();
+                        }
+                    });
+                });
+        });
+    </script>
+}

@@ -138,6 +138,7 @@ namespace SocialApp.Controllers
         
         // POST: /Account/LogOff
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {

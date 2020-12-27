@@ -54,6 +54,7 @@ namespace SocialApp.Controllers.Api
             return Mapper.Map<ApplicationUser, UserDto>(user);
         }
 
+
         // POST /api/posts
         //[HttpPost]
         //public Post CreatePost(Post post)

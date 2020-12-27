@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SocialApp.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
+using SocialApp.Helpers;
 
 namespace SocialApp.Controllers
 {
@@ -17,11 +18,13 @@ namespace SocialApp.Controllers
     {
         protected ApplicationDbContext DbContext { get; set; }
         protected UserManager<ApplicationUser> UserManager { get; set; }
+        protected Utils Utils { get; set; }
 
         public UsersController()
         {
             this.DbContext = new ApplicationDbContext();
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.DbContext));
+            this.Utils = new Utils();
         }
 
         protected override void Dispose(bool disposing)
@@ -61,8 +64,10 @@ namespace SocialApp.Controllers
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             var detailsUser = DbContext.Users.Include(u => u.RelationshipStatus).SingleOrDefault(u => u.Id == userId);
             var friends = DbContext.Friends.ToList();
-            var friend =
-                friends.SingleOrDefault(f => (f.RequestedToId == userId) && (f.RequestedById == currentUser.Id));
+            //var friend =
+            //    friends.SingleOrDefault(f => (f.RequestedToId == currentUser.Id) && (f.RequestedById == userId));
+
+            var friend = Utils.FindFriendRequestMatch(userId, currentUser.Id);
 
             if (detailsUser == null) return HttpNotFound();
 
