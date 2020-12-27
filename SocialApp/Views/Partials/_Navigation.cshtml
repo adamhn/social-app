@@ -23,10 +23,10 @@
                             @Html.ActionLink("My Profile", "Details", "Users", routeValues: new { userId = User.Identity.GetUserId() }, htmlAttributes: new { @class = "btn btn-primary", title = "Manage" })
                         </li>
                         <li>
-                            <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#friendRequestModal">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#friendRequestModal">
                                 Friend Requests <span class="badge badge-light">@Model.FriendRequests.Count()</span>
                             </button>
-                            
+
                             <!-- Modal -->
                             <div class="modal fade" id="friendRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -44,7 +44,7 @@
                                                     <div class="d-flex flex-row mb-3" id="friendRequestItem">
                                                         <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId = friendRequest.Id })" alt="Profile Picture" class="users-profile-thumbnail rounded-circle">
                                                         <p class="mt-2"><strong>@Html.ActionLink(friendRequest.GetFullName(), "Details", "Users", new { userId = friendRequest.Id }, new { @class = "text-dark" })</strong></p>
-                                                        
+
                                                         <div class="ml-auto mt-2">
                                                             <button type="button" data-friendRequest-user-id="@friendRequest.Id" class="btn btn-sm btn-primary js-accept">Accept</button>
                                                             <button type="button" class="btn btn-sm btn-outline-danger js-reject">Reject</button>
@@ -63,10 +63,10 @@
                                     Manage
                                 </button>
                                 <div class="dropdown-menu">
-                                    @Html.ActionLink("Set Information", "SetInformation", "Manage", null, new {@class = "dropdown-item", title = "Set Information"})
-                                    @Html.ActionLink("Set Photo", "SetPhoto", "Manage", null, new {@class = "dropdown-item", title = "My Profile"})
+                                    @Html.ActionLink("Set Information", "SetInformation", "Manage", null, new { @class = "dropdown-item", title = "Set Information" })
+                                    @Html.ActionLink("Set Photo", "SetPhoto", "Manage", null, new { @class = "dropdown-item", title = "My Profile" })
                                     <div class="dropdown-divider"></div>
-                                    @Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new {@class = "dropdown-item", title = "Change Password"})
+                                    @Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new { @class = "dropdown-item", title = "Change Password" })
                                 </div>
                             </div>
                         </li>

@@ -46,35 +46,3 @@ else
         </div>
     }
 </div>
-@section scripts
-{
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#friendRequests .js-accept").on("click",
-                function() {
-                    var button = $(this);
-
-                    $.ajax({
-                        url: "/api/friends/UpdateFriendRequest/" + $(this).attr("data-friendRequest-user-id") + "/" + "@FriendRequestFlag.Approved.ToString()",
-                        method: "PUT",
-                        success: function() {
-                            button.parents("#friendRequestItem").remove();
-                        }
-                    });
-                });
-
-            $("#friendRequests .js-reject").on("click",
-                function () {
-                    var button = $(this);
-
-                    $.ajax({
-                        url: "/api/friends/UpdateFriendRequest/" + $(this).attr("data-friendRequest-user-id") + "/" + "@FriendRequestFlag.Rejected.ToString()",
-                        method: "PUT",
-                        success: function() {
-                            button.parents("#friendRequestItem").remove();
-                        }
-                    });
-                });
-        });
-    </script>
-}

@@ -15,14 +15,20 @@
         <div class="col-md-9 pt-4 pl-4 pb-4 bg-light">
             <h2 class="mb-4">@Model.GetFullName()</h2>
 
-            @if (Model.User.Work == null) {<p>Jobb: <em>Ej satt</em></p>}
-            else { <p>Jobbar på <strong>@Model.User.Work</strong></p> }
+            @if (Model.User.Work == null)
+            {<p>Jobb: <em>Ej satt</em></p>}
+            else
+            { <p>Jobbar på <strong>@Model.User.Work</strong></p>}
 
-            @if (Model.User.Study == null) {<p>Studier: <em>Ej satt</em></p> }
-            else { <p>Har studerat på <strong>@Model.User.Study</strong></p> }
+            @if (Model.User.Study == null)
+            {<p>Studier: <em>Ej satt</em></p> }
+            else
+            { <p>Har studerat på <strong>@Model.User.Study</strong></p>}
 
-            @if (Model.User.RelationshipStatus.Status == "-") {<p>Relation status: <em>Ej satt</em></p> }
-            else { <p>Är <strong>@Model.User.RelationshipStatus.Status</strong></p> }
+            @if (Model.User.RelationshipStatus.Status == "-")
+            {<p>Relation status: <em>Ej satt</em></p> }
+            else
+            { <p>Är <strong>@Model.User.RelationshipStatus.Status</strong></p>}
 
             <p><strong>@Model.User.BirthDate.Age()</strong> år gammal.</p>
         </div>
@@ -32,30 +38,30 @@
             {
                 @Html.ActionLink("Change Image", "SetPhoto", "Manage", null, new { @class = "btn btn-link btn-sm" })
                 @Html.ActionLink("Change Profile", "SetInformation", "Manage", null, new { @class = "btn btn-link btn-sm" })
-                }
-                else
+            }
+            else
+            {
+                switch (Model.FriendRequestFlag)
                 {
-                    switch (Model.FriendRequestFlag)
-                    {
-                        case SocialApp.Models.FriendRequestFlag.None:
-                            @Html.ActionLink("Skicka Vänförfråga", "SendFriendRequest", "Users", new { friendId = Model.User.Id }, new { @class = "btn btn-primary btn-sm" })
-                            break;
-                        case SocialApp.Models.FriendRequestFlag.Approved:
-                            <p>Vänner</p>
+                    case SocialApp.Models.FriendRequestFlag.None:
+                        @Html.ActionLink("Skicka Vänförfråga", "SendFriendRequest", "Users", new { friendId = Model.User.Id }, new { @class = "btn btn-primary btn-sm" })
                         break;
-                        case SocialApp.Models.FriendRequestFlag.Awaiting:
-                            <p>Väntar på godkännande</p>
-                            break;
-                        case SocialApp.Models.FriendRequestFlag.Rejected:
-                            <p>Vänförfråga godkänndes inte.</p>
-                            break;
-                        default:
-                            break;
-                    }
+                    case SocialApp.Models.FriendRequestFlag.Approved:
+                        <p>Vänner</p>
+                        break;
+                    case SocialApp.Models.FriendRequestFlag.Awaiting:
+                        <p>Väntar på godkännande</p>
+                        break;
+                    case SocialApp.Models.FriendRequestFlag.Rejected:
+                        <p>Vänförfråga godkänndes inte.</p>
+                        break;
+                    default:
+                        break;
                 }
+            }
         </div>
     </div>
-    <hr/>
+    <hr />
     <div class="row mt-4 mb-5">
         <div class="col-md-6">
             <p>Wall</p>
@@ -63,9 +69,17 @@
         <div class="col-md-6">
             <p>Friends</p>
             @*@foreach (var friend in Model.User)
-            {
-                <p>@friend.RequestedTo.Firstname</p>
-            }*@
+                {
+                    <p>@friend.RequestedTo.Firstname</p>
+                }*@
         </div>
     </div>
 </div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}
