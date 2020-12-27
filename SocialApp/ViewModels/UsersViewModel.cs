@@ -23,6 +23,9 @@ namespace SocialApp.ViewModels
 
         [Required] public List<ApplicationUser> Friends { get; set; }
 
+        [StringLength(155, MinimumLength = 20, ErrorMessage = "Post cannot be longer then 155 characters and less than 20 characters long")]
+        public Post Post { get; set; }
+
         public string GetFullName()
         {
             return User.Firstname + " " + User.Lastname;

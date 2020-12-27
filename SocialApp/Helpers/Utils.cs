@@ -73,5 +73,20 @@ namespace SocialApp.Helpers
             
             return friends;
         }
+
+        /// <summary>
+        /// Gets all posts for a user id
+        /// with regard that the user himself
+        /// can post on his wall.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<Post> GetAllPosts(string userId)
+        {
+            return DbContext.Posts
+                .Where(p =>
+                    (p.PostedById == userId && p.PostedToId == userId)
+                    || (p.PostedToId == userId)).ToList();
+        }
     }
 }

@@ -62,29 +62,124 @@
         </div>
     </div>
     <hr />
-    <div class="row mt-4 mb-5">
-        <div class="col-md-6">
-            <h5 class="mb-4">Write a Post</h5>
-            @*@Html.TextAreaFor()*@
-        </div>
-        <div class="col-md-6">
-            <h5 class="mb-4">Friends</h5>
-            <div class="d-flex flex-column p-2">
-                @foreach (var friend in Model.Friends)
+    @if (Model.User.Id == User.Identity.GetUserId() || Model.FriendRequestFlag == SocialApp.Models.FriendRequestFlag.Approved)
+    {
+        <div class="row mt-4 mb-5">
+            <div class="col-md-6">
+                <h5 class="mb-4">Write a Post</h5>
+                @using (Html.BeginForm(FormMethod.Post))
                 {
-                    <div class="d-flex flex-row mb-3">
-                        <img src="@Url.Action("GetUserPhoto", "Users" , new { UserId = friend.Id })" alt="Profile Picture" class="users-profile-thumbnail rounded-circle">
-                        <p class="mt-2"><strong>@Html.ActionLink(friend.GetFullName(), "Details", "Users", new { userId = friend.Id }, new { @class = "text-dark" })</strong></p>
+                    <div class="form-group">
+                        @Html.TextAreaFor(d => d.Post, new {@class = "form-control", id = "postTextarea", rows = "3"})
+                        @Html.ValidationMessageFor(d => d.Post, "", new {@class = "text-danger"})
+                        <div class="alert alert-danger mt-2" hidden role="alert">
+                            A simple danger alert—check it out!
+                        </div>
                     </div>
                 }
+                <input id="post" type="submit" value="Post Comment" class="btn btn-primary"/>
+
+                <div id="post-items"></div>
+            </div>
+            <div class="col-md-6">
+                <h5 class="mb-4">Friends</h5>
+                <div class="d-flex flex-column p-2">
+                    @foreach (var friend in Model.Friends)
+                    {
+                        <div class="d-flex flex-row mb-3">
+                            <img src="@Url.Action("GetUserPhoto", "Users", new {UserId = friend.Id})" alt="Profile Picture" class="users-profile-thumbnail rounded-circle">
+                            <p class="mt-2"><strong>@Html.ActionLink(friend.GetFullName(), "Details", "Users", new {userId = friend.Id}, new {@class = "text-dark"})</strong></p>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row mt-5 mb-5 mr-auto ml-auto justify-content-center">
+            <h5 class="text-center"><mark>You have to be friends before seeing posts wall and friends.</mark></h5>
+        </div>
+    }
 </div>
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
+            // Get all posts on page load
+            $.ajax({
+                url: "/api/Posts/GetPosts/" + "@Model.User.Id",
+                dataType: "json",
+                type: "GET",
+                success: function(data) {
+                    var item = "";
+                    // Sort data by date
+                    data.sort(function(a, b) {
+                        var c = new Date(a.PostedDatetime);
+                        var d = new Date(b.PostedDatetime);
+                        return c-d;
+                    });
+
+                    for (var i = 0; i < data.length; i++) {
+                        item = item + '<div id="post-item" class="pt-4 pl-3 pr-3 pb-2 mt-4 rounded-sm bg-light">';
+                        item = item + '<p>' + data[i].Text + '</p>';
+                        item = item + '<p class="mt-4"><em>' + "Written by --- " + '</em></p>';
+                        item = item + '<p><em>' + new Date(data[i].PostedDatetime).toLocaleString() + '</em></p>';
+                        item = item + '</div>';
+                    }
+
+                    $('#post-items').empty();
+                    $('#post-items').append(item);
+                },
+                error: function(xhr) {
+                    alert('No Valid Data');
+                }
+            });
+
+            // Handle on text area focus
+            $("#postTextarea").on("focus",
+                function() {
+                    $('.alert').attr('hidden', 'true');
+                });
+
+            // Handle post form click
+            $("#post").on("click",
+                function(e) {
+                    var textareaVal = $("#postTextarea").val();
+                    console.log(textareaVal);
+
+                    if (textareaVal.length === 0) {
+                        e.preventDefault();
+                        //alert("Cannot be empty.");
+                        $('.alert').text("Post cannot be submitted empty.");
+                        $('.alert').removeAttr('hidden');
+                        return;
+                    }
+
+                    if (textareaVal.length < 20 || textareaVal.length > 155) {
+                        e.preventDefault();
+                        console.log('cannot');
+                        return;
+                    }
+
+                    console.log('clicked');
+                    var post = {
+                        'Text': textareaVal,
+                        'PostedById': "@User.Identity.GetUserId()",
+                        'PostedToId': "@Model.User.Id"
+                    }
+
+                    $.ajax({
+                        url: "/api/Posts/CreatePost",
+                        type: "POST",
+                        data: post,
+                        success: function(data) {
+                            location.reload();
+                        }
+                    })
+                });
+
 
         });
     </script>
