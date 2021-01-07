@@ -32,11 +32,13 @@ namespace SocialApp.Controllers
             DbContext.Dispose();
         }
 
+        // GET Users
         [AllowAnonymous]
         public async Task<ActionResult> Index(string searchText)
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
+            // TODO: Prevent a flagged private user to not be shown
             var viewModel = new ViewModels.UsersViewModel
             {
                 Users = DbContext.Users
