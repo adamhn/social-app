@@ -43,6 +43,7 @@ namespace SocialApp.Controllers
             {
                 Users = DbContext.Users
                     .Where(u => u.Firstname.Contains(searchText) || searchText == null)
+                    .Where(u => u.IsHiddenFromSearch == false)
                     .OrderBy(u => u.Firstname)
                     .ToList(),
                 CurrentUser = currentUser
@@ -53,6 +54,7 @@ namespace SocialApp.Controllers
             //viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).OrderBy(u => u.Firstname).ToList();
             viewModel.Users = DbContext.Users
                 .Where(x => (x.Firstname.Contains(searchText) || searchText == null) && x.Id != currentUser.Id)
+                .Where(x => x.IsHiddenFromSearch == false)
                 .OrderBy(u => u.Firstname)
                 .ToList();
 
