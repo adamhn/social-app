@@ -318,6 +318,10 @@
     <Compile Include="Migrations\202012271458198_UpdatePostWithFullname.designer.cs">
       <DependentUpon>202012271458198_UpdatePostWithFullname.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101092323393_AddFieldIdentityModel.cs" />
+    <Compile Include="Migrations\202101092323393_AddFieldIdentityModel.designer.cs">
+      <DependentUpon>202101092323393_AddFieldIdentityModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\Enums\FriendRequestFlag.cs" />
@@ -590,6 +594,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012271458198_UpdatePostWithFullname.resx">
       <DependentUpon>202012271458198_UpdatePostWithFullname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101092323393_AddFieldIdentityModel.resx">
+      <DependentUpon>202101092323393_AddFieldIdentityModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

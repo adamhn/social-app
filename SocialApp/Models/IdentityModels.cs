@@ -37,6 +37,13 @@ namespace SocialApp.Models
 
         public byte[] Picture { get; set; }
 
+        public bool IsHiddenFromSearch { get; set; }
+
+        public ApplicationUser()
+        {
+            IsHiddenFromSearch = false;
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
