@@ -74,8 +74,10 @@ namespace SocialApp.Controllers
                 Study = currentUser.Study,
                 BirthDate = currentUser.BirthDate,
                 RelationshipStatus = relationshipStatus,
-                RelationshipStatusId = currentUser.RelationshipStatusId
+                RelationshipStatusId = currentUser.RelationshipStatusId,
+                IsHiddenFromSearch = currentUser.IsHiddenFromSearch
             };
+
             return View(viewModel);
         }
 
@@ -95,10 +97,12 @@ namespace SocialApp.Controllers
             currentUser.Study = model.Study;
             currentUser.BirthDate = model.BirthDate;
             currentUser.RelationshipStatusId = model.RelationshipStatusId;
+            currentUser.IsHiddenFromSearch = model.IsHiddenFromSearch;
 
             await UserManager.UpdateAsync(currentUser);
 
-            return RedirectToAction("Details", "Users", new { userId = currentUser.Id });
+            //return RedirectToAction("Details", "Users", new { userId = currentUser.Id });
+            return RedirectToAction("SetInformation");
         }
 
         // GET: /Manage/SetPhoto

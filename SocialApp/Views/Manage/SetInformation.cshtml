@@ -44,6 +44,14 @@
                 @Html.DropDownList("RelationshipStatusId", new SelectList(Model.RelationshipStatus, "Id", "Status", @Model.RelationshipStatusId), new { @class = "custom-select", id = "inputRelationshipStatus" })
             </div>
         </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <div class="form-check">
+                    @Html.CheckBoxFor(m => m.IsHiddenFromSearch, new {@class = "form-check-input", id = "inputIsHiddenFromSearch"})
+                    @Html.LabelFor(x => x.IsHiddenFromSearch, new {@class = "form-check-label", @for = "inputIsHiddenFromSearch"})
+                </div>
+            </div>
+        </div>
         <input type="submit" value="Update Profile" class="btn btn-primary" />
     }
 </div>

@@ -41,6 +41,9 @@ namespace SocialApp.ViewModels
         [Required]
         [Display(Name = "Relationship Status")]
         public byte RelationshipStatusId { get; set; }
+
+        [Display(Name = "Hide from search?")]
+        public bool IsHiddenFromSearch { get; set; }
     }
 
     public class ChangePasswordViewModel
