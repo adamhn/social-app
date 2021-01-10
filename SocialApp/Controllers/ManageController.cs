@@ -101,7 +101,6 @@ namespace SocialApp.Controllers
 
             await UserManager.UpdateAsync(currentUser);
 
-            //return RedirectToAction("Details", "Users", new { userId = currentUser.Id });
             return RedirectToAction("SetInformation");
         }
 
