@@ -44,6 +44,8 @@
                 function() {
                     var button = $(this);
 
+                    console.log($(this).attr("data-friendRequest-user-id"));
+
                     $.ajax({
                         url: "/api/friends/UpdateFriendRequest/" + $(this).attr("data-friendRequest-user-id") + "/" + "@FriendRequestFlag.Approved.ToString()",
                         method: "PUT",
@@ -56,7 +58,8 @@
             /**
              * Handle friend request on accept btn
              * Make an ajax request to put new changes in db
-             */            $("#friendRequests .js-reject").on("click",
+             */            
+            $("#friendRequests .js-reject").on("click",
                 function () {
                     var button = $(this);
 

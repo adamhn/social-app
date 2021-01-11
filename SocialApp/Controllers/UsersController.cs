@@ -38,7 +38,6 @@ namespace SocialApp.Controllers
         {
             var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            // TODO: Prevent a flagged private user to not be shown
             var viewModel = new ViewModels.UsersViewModel
             {
                 Users = DbContext.Users
@@ -51,7 +50,6 @@ namespace SocialApp.Controllers
 
             if (currentUser == null) return View(viewModel);
 
-            //viewModel.Users = DbContext.Users.Where(u => u.Id != currentUser.Id).OrderBy(u => u.Firstname).ToList();
             viewModel.Users = DbContext.Users
                 .Where(x => (x.Firstname.Contains(searchText) || searchText == null) && x.Id != currentUser.Id)
                 .Where(x => x.IsHiddenFromSearch == false)

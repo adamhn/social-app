@@ -174,15 +174,7 @@ namespace SocialApp.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
+        #region Helpers
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -190,17 +182,6 @@ namespace SocialApp.Controllers
                 ModelState.AddModelError("", error);
             }
         }
-
-        private bool HasPassword()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
-
-#endregion
+        #endregion
     }
 }
